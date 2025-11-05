@@ -2,8 +2,8 @@
   "packages": {
     ".": {
       "release-type": "java"
-    },
-    "process-pull-requests": false
+    }
   },
+  "process-pull-requests": false,
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
