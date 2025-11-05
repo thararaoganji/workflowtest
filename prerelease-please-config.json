@@ -1,16 +1,17 @@
 {
   "packages": {
     ".": {
-      "release-type": "java",
+      "release-type": "simple",
       "prerelease": true,
-      "prerelease-type": "rc"
+      "prerelease-type": "rc",
+      "changelog-path": "CHANGELOG.md"
     }
   },
   "extra-files": [
     {
-      "type": "plain-text",
+      "type": "json",
       "path": "build.gradle",
-      "pattern": "version = '(.+)'"
+      "jsonpath": "$.version"
     }
   ],
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"

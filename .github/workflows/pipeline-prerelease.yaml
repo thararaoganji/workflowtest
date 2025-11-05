@@ -1,0 +1,20 @@
+name: Pipeline - INT Deployment
+
+on:
+  release:
+    types:
+      - prereleased
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  backendCI:
+      uses: thararaoganji/workflowtest/.github/workflows/ci-java.yaml@main
+      with:
+        environment: dev
+        java-version: "17"
+        working-directory: .
+        publish-to-gh: true
+      secrets: inherit

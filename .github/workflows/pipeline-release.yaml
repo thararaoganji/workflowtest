@@ -1,0 +1,20 @@
+name: Pipeline - INT, QS & PROD Deployment
+
+on:
+  release:
+    types:
+      - released
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  backendCI:
+      uses: thararaoganji/workflowtest/.github/workflows/ci-java.yaml@main
+      with:
+        environment: dev
+        java-version: "17"
+        working-directory: .
+        publish-to-gh: true
+      secrets: inherit

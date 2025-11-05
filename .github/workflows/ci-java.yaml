@@ -103,6 +103,7 @@ jobs:
           chmod +x ./gradlew
           ./gradlew clean build
       - name: Publish to GitHub Packages
+        if: ${{ inputs.publish-to-gh == true }}
         working-directory: ${{ inputs.working-directory }}
         shell: bash
         run: |
