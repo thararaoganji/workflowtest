@@ -3,8 +3,7 @@
     ".": {
       "release-type": "java",
       "prerelease": true,
-      "prerelease-type": "rc",
-      "changelog-type": "commit-message"
+      "prerelease-type": "rc"
     }
   },
   "process-pull-requests": false,
