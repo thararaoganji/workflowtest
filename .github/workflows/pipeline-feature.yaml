@@ -7,6 +7,7 @@ on:
     paths:
       - .github/**
       - src/**
+      - build.gradle
 
 permissions:
   contents: read
