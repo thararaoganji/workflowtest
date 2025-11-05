@@ -35,9 +35,5 @@ public class HelloWorldController {
         return "v8 - Hello workflowtest";
     }
 
-    @GetMapping("/hello/v9")
-    public String helloV9() {
-        return "v9 - Hello workflowtest";
-    }
 
 }
