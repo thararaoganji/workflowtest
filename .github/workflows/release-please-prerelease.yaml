@@ -17,8 +17,15 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Bootstrap Release PR
-        uses: google-github-actions/release-pr@v4
+        uses: docker://gcr.io/google-containers/release-please
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          config-file: prerelease-please-config.json
-          manifest-file: .release-please-manifest.json
+          entrypoint: release-please
+          args: >
+            release-pr
+            --config-file=prerelease-please-config.json
+            --manifest-file=.release-please-manifest.json
+            --repo-url=${{ github.repository }}
