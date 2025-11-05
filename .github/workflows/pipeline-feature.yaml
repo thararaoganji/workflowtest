@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   backendCI:
-    uses: thararaoganji/workflowtest/.github/worflows/ci-java.yaml@main
+    uses: thararaoganji/workflowtest/.github/workflows/ci-java.yaml@main
     with:
       environment: dev
       java-version: "17"

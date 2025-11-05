@@ -79,7 +79,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    enviroment: ${{ inputs.enviroment }}
+    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
