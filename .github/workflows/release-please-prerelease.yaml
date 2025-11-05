@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Bootstrap Release PR
-        uses: docker://gcr.io/google-containers/release-please
+        uses: docker://ghcr.io/google-github-actions/release-please-action:v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
