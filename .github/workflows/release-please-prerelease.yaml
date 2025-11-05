@@ -17,21 +17,17 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Get App Token
+        uses: actions/create-github-app-token@v1
+        id: app-token
         with:
-          node-version: '20'
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_ID_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
 
-      - name: Install release-please
-        run: npm install -g release-please
-
-      - name: Run release-pr to bootstrap
-        run: |
-          release-please release-pr \
-            --config-file=prerelease-please-config.json \
-            --manifest-file=.release-please-manifest.json \
-            --repo-url=${{ github.repository }} \
-            --token=${{ secrets.GITHUB_TOKEN }}
+      - name: Release Please Prerelease
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: prerelease-please-config.json
+          manifest-file: .release-please-manifest.json
+          token: ${{ steps.app-token.outputs.token }}
