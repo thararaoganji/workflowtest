@@ -1,0 +1,33 @@
+name: Prerelease
+description: Create a prerelease pull requests and prereleases
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - ".github/release-please/manifest.json"
+      - "CHANGELOG.md"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get App Token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_ID_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Release Please Prerelease
+        uses: google-github-actions/release-please-action@v4
+        with:
+          config-file: prerelease-please-config.json
+          manifest-file: .prerelease-please-manifest.json
+          token: ${{ steps.app-token.outputs.token }}
