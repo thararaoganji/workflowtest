@@ -1,0 +1,105 @@
+name: Continuous Integration - Java Backend
+
+on:
+  workflow_call:
+    inputs:
+      java-version:
+        description: "Version of Java to compile the application"
+        type: string
+        required: false
+        default: "21"
+      environment:
+        description: "Environment to push the image"
+        type: string
+        required: true
+      working-directory:
+        description: "Directory that contains the Java build-code and Dockerfile"
+        type: string
+        required: false
+        default: "."
+      sonar-scan:
+        description: "Set to false if Sonarqube scan must not be executed"
+        type: boolean
+        required: false
+        default: false
+      sonar-quality-gate:
+        description: "Set to true if Sonarqube quality gate should be executed"
+        type: boolean
+        required: false
+        default: false
+      blackduck-scan:
+        description: "Set to true if Blackduck scan should be executed"
+        type: boolean
+        required: false
+        default: false
+      blackduck-docker-scan:
+        description: "Set to true if Blackduck scan should be executed on docker image"
+        type: boolean
+        required: false
+        default: false
+      blackduck-project:
+        description: "Project name to use in Blackduck Hub"
+        type: string
+        required: false
+      blackduck-project-version:
+        description: "Project version to store scan results in"
+        type: string
+        required: false
+      blackduck-project-version-phase:
+        description: "Project version phase to use in Blackduck Hub"
+        type: string
+        required: false
+        default: "DEVELOPMENT"
+      blackduck-quality-gate:
+        description: "Set to true if Blackduck quality gate needs to be passed"
+        type: boolean
+        required: false
+        default: false
+      blackduck-severities:
+        description: "Comma-separated list of severities to use for Blackduck quality gate"
+        type: string
+        required: false
+        default: "CRITICAL,BLOCKER"
+      sbom-scan:
+        description: "Set to true if SBOM should be generated and published to SBOM Inventory"
+        type: boolean
+        required: false
+        default: false
+      sbom-component:
+        description: "Component name for SBOM Inventory publishing"
+        type: string
+        required: false
+        default: "backend"
+env:
+  USERNAME: ${{ secrets.GH_PACKAGE_USER }}
+  TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
+
+jobs:
+  ci-java:
+    permissions:
+      contents: read
+      id-token: write
+    enviroment: ${{ inputs.enviroment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: "corretto"
+          java-version: ${{ inputs.java-version }}
+      - name: Test and build JAR with Gradle
+        working-directory: ${{ inputs.working-directory }}
+        shell: bash
+        run: |
+          chmod +x ./gradlew
+          ./gradlew clean build
+      - name: Publish to GitHub Packages
+        working-directory: ${{ inputs.working-directory }}
+        shell: bash
+        run: |
+          chmod +x ./gradlew
+          ./gradlew publish
