@@ -26,7 +26,7 @@ jobs:
           owner: ${{ github.repository_owner }}
 
       - name: Release Please Prerelease
-        uses: google-github-actions/release-please-action@v4
+        uses: googleapis/release-please-action@v4
         with:
           config-file: prerelease-please-config.json
           manifest-file: .prerelease-please-manifest.json
