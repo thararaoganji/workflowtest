@@ -11,7 +11,7 @@ public class HelloWorldController {
     }
 
     @GetMapping("/hello/v2")
-    public String hello() {
+    public String helloV2() {
         return "v2 - Hello workflowtest";
     }
 
