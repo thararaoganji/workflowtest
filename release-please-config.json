@@ -6,5 +6,6 @@
       "prerelease-type": "rc"
     }
   },
+  "bootstrap-sha": "87539964f1f3a95c0b384b852c3ba947b1aac60e",
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
