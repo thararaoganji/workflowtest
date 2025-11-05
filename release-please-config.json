@@ -2,6 +2,7 @@
   "packages": {
     ".": {
       "release-type": "java"
+      "changelog-type": "commit-message"
     }
   },
   "process-pull-requests": false,
