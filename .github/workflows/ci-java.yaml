@@ -70,6 +70,11 @@ on:
         type: string
         required: false
         default: "backend"
+      publish-to-gh:
+        description: "Set to true if the pacakge to be published to GitHub Packages"
+        type: boolean
+        required: false
+        default: false
 env:
   USERNAME: ${{ secrets.GH_PACKAGE_USER }}
   TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
