@@ -25,4 +25,9 @@ public class HelloWorldController {
         return "v4 - Hello workflowtest";
     }
 
+    @GetMapping("/hello/v5")
+    public String helloV5() {
+        return "v5 - Hello workflowtest";
+    }
+
 }
