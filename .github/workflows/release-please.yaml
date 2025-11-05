@@ -13,8 +13,21 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: googleapis/release-please-action@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          command: release-pr
-          config-file: release-please-config.json
-          manifest-file: .release-please-manifest.json
+          node-version: '20'
+
+      - name: Install release-please
+        run: npm install -g release-please
+
+      - name: Run release-pr
+        run: |
+          release-please release-pr \
+            --config-file=release-please-config.json \
+            --manifest-file=.release-please-manifest.json \
+            --repo-url=${{ github.repository }} \
+            --token=${{ secrets.GITHUB_TOKEN }}
