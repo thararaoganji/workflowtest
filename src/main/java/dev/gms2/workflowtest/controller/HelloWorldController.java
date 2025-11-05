@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
     @GetMapping("/hello")
     public String hello() {
-        return "Hello World - Spring Boot | workflowtest :) :)";
+        return "v1 - Hello workflowtest";
     }
+
+    @GetMapping("/hello/v2")
+    public String hello() {
+        return "v2 - Hello workflowtest";
+    }
+
 }
