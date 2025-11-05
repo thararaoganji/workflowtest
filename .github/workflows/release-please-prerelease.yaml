@@ -29,5 +29,5 @@ jobs:
         uses: googleapis/release-please-action@v4
         with:
           config-file: prerelease-please-config.json
-          manifest-file: .prerelease-please-manifest.json
+          manifest-file: .release-please-manifest.json
           token: ${{ steps.app-token.outputs.token }}
