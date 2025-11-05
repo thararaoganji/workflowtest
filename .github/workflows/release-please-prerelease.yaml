@@ -17,8 +17,18 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - name: Release Please Prerelease
-        uses: google-github-actions/release-pr@v4
+      - name: Get App Token
+        uses: actions/create-github-app-token@v1
+        id: app-token
         with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_ID_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Bootstrap Release PR
+        uses: googleapis/release-please-action@v4
+        with:
+          command: release-pr
           config-file: prerelease-please-config.json
           manifest-file: .release-please-manifest.json
+          token: ${{ steps.app-token.outputs.token }}
