@@ -12,6 +12,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  packages: read # Required to pull docker image from ghcr.io
 
 jobs:
   release-please:
