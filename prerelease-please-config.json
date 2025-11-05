@@ -6,6 +6,5 @@
       "prerelease-type": "rc"
     }
   },
-  "process-pull-requests": false,
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
