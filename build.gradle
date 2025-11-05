@@ -6,7 +6,6 @@ plugins {
 }
 
 group = 'dev.gms2'
-version = '0.1.0'
 description = 'To Test Github workflows'
 
 java {
