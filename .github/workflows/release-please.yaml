@@ -1,10 +1,9 @@
-name: Release
-description: Create a release pull requests and releases
+name: Release Please
 
 on:
-  release:
-    types:
-      - prereleased
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -14,17 +13,7 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - name: Get App Token
-        uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: ${{ vars.APP_ID }}
-          private-key: ${{ secrets.APP_ID_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-
-      - name: Release Please
-        uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
-          token: ${{ steps.app-token.outputs.token }}

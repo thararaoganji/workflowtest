@@ -1,0 +1,27 @@
+name: Publish Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-package:
+    name: Publish to GitHub Packages
+    permissions:
+      contents: read
+      packages: write
+      id-token: write # Required by the reusable ci-java.yaml workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code at release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Publish Package
+        uses: ./.github/workflows/ci-java.yaml
+        with:
+          environment: dev # Or 'prod' depending on your needs
+          java-version: "17"
+          publish-to-gh: true
+        secrets: inherit
